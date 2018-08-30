@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from sqlalchemy import Column, String, Integer, Date, Table, ForeignKey, Text
+from sqlalchemy import Column, String, Integer, Date, Table, ForeignKey, Text, DateTime
 from sqlalchemy.orm import relationship
 
 from base import Base
@@ -27,7 +27,7 @@ class Event(Base):
     language_id = Column(Integer, ForeignKey('language.id'))
     language = relationship("Language")
     
-    date = Column(Date, nullable=False)
+    date = Column(DateTime, nullable=False)
     
     max_members = Column(Integer, nullable=False)
     current_num_members = Column(Integer) # ???

@@ -6,7 +6,7 @@ CATEGORIES_QTY = 30
 MAX_MEMBERS_QTY = 6
 MAX_RATING = 300
 
-from datetime import date
+from datetime import date, datetime
 from random import randint
 
 from base import Session, engine, Base
@@ -115,7 +115,7 @@ for i in range(EVENTS_QTY):
         f'Topic of event {current_id}.',
         f'Very long description of event {current_id}',
         language_id,
-        date(2018, 10, 1),
+        datetime(2018, 10, 1, 19, 00, 00),
         max_members,
         date(2018, 1, 1),
         current_id,
@@ -138,6 +138,31 @@ for i in range(EVENTS_QTY):
     session.add(current_event)
 
 session.commit()
+
+# create messages
+for i in range(USERS_QTY):
+    message = Message(
+        f"Message text with id: {i+1}",
+        i+1,
+        randint(1, USERS_QTY),
+        date(2002, 10, 11)
+    )
+    session.add(message)
+
+session.commit()
+
+# create comments
+for i in range(USERS_QTY):
+    comment = Comment(
+        i + 1,
+        randint(1, USERS_QTY),
+        f"Comment text with id: {i+1}",
+        date(2002, 10, 11)
+    )
+    session.add(comment)
+
+session.commit()
+
 
 # close session
 session.close()

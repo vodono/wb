@@ -24,11 +24,11 @@ class Message(Base):
     received = Column(Boolean, nullable=False)
     deleted = Column(Boolean)
 
-    def __init__(self, text, created, author_id, recipient_id, received, updated, deleted):
+    def __init__(self, text, author_id, recipient_id, created):
         self.text = text
         self.author_id = author_id
         self.recipient_id = recipient_id
-        self.received = received
         self.created = created
-        self.updated = updated
-        self.deleted = deleted
+        self.updated = None
+        self.received = False
+        self.deleted = False

@@ -21,10 +21,10 @@ class Comment(Base):
     updated = Column(Date)
     deleted = Column(Boolean)
 
-    def __init__(self, author_id, recipient_id, text, created, updated, deleted):
+    def __init__(self, author_id, recipient_id, text, created):
         self.author_id = author_id
         self.recipient_id = recipient_id
         self.text = text
         self.created = created
-        self.updated = updated
-        self.deleted = deleted
+        self.updated = None
+        self.deleted = False
