@@ -136,6 +136,8 @@ class User(Base):
             f'updated: \t{self.updated}\n'
             f'deleted: \t{self.deleted}\n'
         )
+        for i in self.author_comments:
+            user_string += f'author_comments {i.created}: \t {i.text}\n'
         return user_string 
            
     # def validate_password(self, password):

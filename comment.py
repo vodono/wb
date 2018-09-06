@@ -13,8 +13,16 @@ class Comment(Base):
     
     author_id = Column(Integer, ForeignKey('user.id'), nullable=False)
     recipient_id = Column(Integer, ForeignKey('user.id'), nullable=False)
-    author = relationship("User", foreign_keys=[author_id])
-    recipient = relationship("User", foreign_keys=[recipient_id])
+    author = relationship(
+        "User",
+        foreign_keys=[author_id],
+        backref=backref("author_comments")
+    )
+    recipient = relationship(
+        "User",
+        foreign_keys=[recipient_id],
+        backref=backref("recipient_comments")
+    )
     
     text = Column(Text, nullable=False)
     created = Column(Date, nullable=False)

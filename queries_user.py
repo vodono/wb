@@ -1,4 +1,5 @@
 from base import Session
+from sqlalchemy import func
 
 from category import Category
 from comment import Comment
@@ -10,19 +11,24 @@ from user import User
 
 session = Session()
 
-# extract users list without filter
-# users_list = session.query(User).all()
-# print('List of users without filters selected:')
-# for user in users_list[:5]:
-#     print(user)
-
-
-filtered_users_list = session.query(User).join(Language, User.language).filter(
-    User.city == 'Kyiv',
-    Language.title == 'language_2'
-)
 print('List of users with filters selected:')
-for user in filtered_users_list[:4]:
+
+filtered_users_list = session.query(
+    User,
+).outerjoin(
+    Language,
+    User.language,
+).outerjoin(
+    Comment,
+    User.recipient_comments,
+).filter(
+    User.city == 'Kyiv',
+    Language.title == 'language_2',
+).order_by(
+    User.first_name
+).all()
+
+for user in filtered_users_list[:]:
     print(user)
 
 
